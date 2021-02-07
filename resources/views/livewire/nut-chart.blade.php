@@ -70,7 +70,7 @@
                         Average Nut
                     </dt>
                     <dd class="mt-1 text-3xl font-semibold text-gray-900">
-                        {{round($average,0)}}
+                        {{round($average,2)}}
                     </dd>
                 </div>
             </div>

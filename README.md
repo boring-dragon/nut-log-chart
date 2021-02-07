@@ -2,7 +2,8 @@
 
 ![screenshot](screenshot.PNG)
 
-Get a detailed overview of your Nut Logs💦
+Get a detailed overview of your Nut Logs💦. More features for this web app is planned and will be added soon. If you have any ideas you are welcome to share. 
+You are welcome to improve and send pull requests.
 
 ## Setup
 

@@ -23,8 +23,12 @@ class NutChart extends Component
 
     public function render()
     {
-        if ( isset($this->nutlog) | isset($this->nut)) {
+        if (isset($this->nutlog) | isset($this->nut)) {
             if ($this->nutlog) {
+                if ($this->nutlog->getMimeType() != "application/json") {
+                    abort(422, "Invalid file format");
+                }
+
                 $result = json_decode(file_get_contents($this->nutlog->getRealPath()), true);
             } else {
                 $result = NutLog::findOrFail($this->nut)->data;

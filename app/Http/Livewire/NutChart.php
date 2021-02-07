@@ -30,14 +30,15 @@ class NutChart extends Component
                 }
 
                 $result = json_decode(file_get_contents($this->nutlog->getRealPath()), true);
+
+                $generated_nut_log = NutLog::create([
+                    "name" => $result["name"] ?: 'Unkown',
+                    "data" => $result
+                ]);
             } else {
                 $result = NutLog::findOrFail($this->nut)->data;
             }
 
-            $generated_nut_log = NutLog::create([
-                "name" => $result["name"] ?: 'Unkown',
-                "data" => $result
-            ]);
 
             $cleaned = collect($result["messages"])->groupBy(function ($data) {
                 return Carbon::parse($data["date"])->format('d-m-Y');

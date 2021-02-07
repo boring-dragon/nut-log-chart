@@ -90,12 +90,25 @@
 
     @endif
 
+    
+
     @if($areaChartModel)
 
     <div class="shadow rounded p-4 border bg-white mt-5" style="height: 32rem;">
         <livewire:livewire-area-chart key="{{ $areaChartModel->reactiveKey() }}" :area-chart-model="$areaChartModel" />
     </div>
     @endif
+
+    @if($columnChartModel)
+
+    <div class="shadow rounded p-4 border bg-white mt-5" style="height: 32rem;">
+        <livewire:livewire-column-chart
+                key="{{ $columnChartModel->reactiveKey() }}"
+                :column-chart-model="$columnChartModel"
+            />
+    </div>
+    @endif
+
 
     @if($sharelink)
     <div class="mt-2 flex flex-col items-center justify-center ">

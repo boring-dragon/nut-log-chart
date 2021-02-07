@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Asantibanez\LivewireCharts\Models\AreaChartModel;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 use App\Models\NutLog;
@@ -19,6 +20,21 @@ class NutChart extends Component
     public $nut;
 
     protected $queryString = ['nut'];
+
+    public $colors = [
+        'Jan' => '#EC4899',
+        'Feb' => '#3B82F6',
+        'Mar' => '#A5B4FC',
+        'Apr' => '#F59E0B',
+        'May' => '#EF4444',
+        'June' => '#FBBC05',
+        'July' => '#F99F81',
+        'Aug' => '#cbd5e0',
+        'Sep' => '#f6ad55',
+        'Oct' => '#fc8181',
+        'Nov' => '#90cdf4',
+        'Dec' => '#66DA26'
+    ];
 
 
     public function render()
@@ -44,6 +60,10 @@ class NutChart extends Component
                 return Carbon::parse($data["date"])->format('d-m-Y');
             });
 
+            $total_per_month = collect($result["messages"])->groupBy(function ($data) {
+                return Carbon::parse($data["date"])->format('M');
+            });
+
             $totals = $cleaned->map(function ($item, $key) {
                 return [
                     "date" => $key,
@@ -54,6 +74,16 @@ class NutChart extends Component
             $highest = $totals->sortByDesc('data')->first();
             $average = $totals->avg('data');
             $sum = $totals->sum('data');
+
+            $columnChartModel = $total_per_month
+            ->reduce(function (ColumnChartModel $columnChartModel, $data, $month) {
+
+                return $columnChartModel->addColumn( $month, $data->count(), $this->colors[$month]);
+            }, (new ColumnChartModel())
+                ->setTitle($result["name"] ?: 'Nut log Bar')
+                ->setAnimated($this->firstRun)
+                ->withOnColumnClickEventName('onColumnClick')
+            );
 
             $areaChartModel = $cleaned
                 ->reduce(
@@ -73,6 +103,7 @@ class NutChart extends Component
 
         return view('livewire.nut-chart')->with([
             'areaChartModel' => $areaChartModel ?? null,
+            'columnChartModel' => $columnChartModel ?? null,
             'sharelink' => $generated_nut_log ?? null,
             'highest' => $highest ?? null,
             'average' => $average ?? null,

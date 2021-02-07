@@ -104,7 +104,7 @@
 
             <div class="mt-8 flex justify-center">
 
-                <a href="#" class="ml-6 text-gray-600 hover:text-gray-800">
+                <a href="https://github.com/boring-dragon/nut-log-chart" class="ml-6 text-gray-600 hover:text-gray-800">
                     <span class="sr-only">GitHub</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"

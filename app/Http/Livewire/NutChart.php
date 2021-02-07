@@ -80,7 +80,7 @@ class NutChart extends Component
 
                 return $columnChartModel->addColumn( $month, $data->count(), $this->colors[$month]);
             }, (new ColumnChartModel())
-                ->setTitle($result["name"] ?: 'Nut log Bar')
+                ->setTitle($result["name"]. " Bar" ?: 'Nut log Bar')
                 ->setAnimated($this->firstRun)
                 ->withOnColumnClickEventName('onColumnClick')
             );

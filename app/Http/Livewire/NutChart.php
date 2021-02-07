@@ -44,6 +44,17 @@ class NutChart extends Component
                 return Carbon::parse($data["date"])->format('d-m-Y');
             });
 
+            $totals = $cleaned->map(function ($item, $key) {
+                return [
+                    "date" => $key,
+                    "data" => $item->count()
+                ];
+            });
+
+            $highest = $totals->sortByDesc('data')->first();
+            $average = $totals->avg('data');
+            $sum = $totals->sum('data');
+
             $areaChartModel = $cleaned
                 ->reduce(
                     function (AreaChartModel $areaChartModel, $data, $date) {
@@ -62,7 +73,10 @@ class NutChart extends Component
 
         return view('livewire.nut-chart')->with([
             'areaChartModel' => $areaChartModel ?? null,
-            'sharelink' => $generated_nut_log ?? null
+            'sharelink' => $generated_nut_log ?? null,
+            'highest' => $highest ?? null,
+            'average' => $average ?? null,
+            'sum' => $sum ?? null
         ]);
     }
 }

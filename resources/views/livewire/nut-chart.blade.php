@@ -87,25 +87,32 @@
             </div>
         </dl>
     </div>
-
     @endif
 
-    
 
-    @if($areaChartModel)
 
+    @if($nut_per_day)
+    <h3 class="text-gray-700 text-xl font-semibold mt-3 text-center">Nut per Day</h3>
     <div class="shadow rounded p-4 border bg-white mt-5" style="height: 32rem;">
-        <livewire:livewire-area-chart key="{{ $areaChartModel->reactiveKey() }}" :area-chart-model="$areaChartModel" />
+        <livewire:livewire-area-chart key="{{ $nut_per_day->reactiveKey() }}" :area-chart-model="$nut_per_day" />
     </div>
     @endif
 
-    @if($columnChartModel)
-
+    @if($nut_per_month)
+    <h3 class="text-gray-700 text-xl font-semibold mt-3 text-center">Nut per Month</h3>
     <div class="shadow rounded p-4 border bg-white mt-5" style="height: 32rem;">
-        <livewire:livewire-column-chart
-                key="{{ $columnChartModel->reactiveKey() }}"
-                :column-chart-model="$columnChartModel"
-            />
+        <livewire:livewire-column-chart key="{{ $nut_per_month->reactiveKey() }}"
+            :column-chart-model="$nut_per_month" />
+    </div>
+    @endif
+
+
+    @if($how_often_chart)
+    <h3 class="text-gray-700 text-xl font-semibold mt-3 text-center">How often and How much</h3>
+    <p class="text-sm font-medium text-gray-500 truncate text-center">Amount per day</p>
+    <div class="shadow rounded p-4 border bg-white mt-5" style="height: 32rem;">
+        <livewire:livewire-column-chart key="{{ $how_often_chart->reactiveKey() }}"
+            :column-chart-model="$how_often_chart" />
     </div>
     @endif
 

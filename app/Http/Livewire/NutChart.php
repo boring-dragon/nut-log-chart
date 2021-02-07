@@ -71,21 +71,41 @@ class NutChart extends Component
                 ];
             });
 
+
+            $how_often = $totals->groupBy('data')->map(function ($item) {
+                return $item->sum('data');
+            });
+
             $highest = $totals->sortByDesc('data')->first();
             $average = $totals->avg('data');
             $sum = $totals->sum('data');
 
-            $columnChartModel = $total_per_month
-            ->reduce(function (ColumnChartModel $columnChartModel, $data, $month) {
+            $nut_per_month = $total_per_month
+                ->reduce(
+                    function (ColumnChartModel $columnChartModel, $data, $month) {
 
-                return $columnChartModel->addColumn( $month, $data->count(), $this->colors[$month]);
-            }, (new ColumnChartModel())
-                ->setTitle($result["name"]. " Bar" ?: 'Nut log Bar')
-                ->setAnimated($this->firstRun)
-                ->withOnColumnClickEventName('onColumnClick')
-            );
+                        return $columnChartModel->addColumn($month, $data->count(), $this->colors[$month]);
+                    },
+                    (new ColumnChartModel())
+                        ->setTitle($result["name"] . " Bar" ?: 'Nut log Bar')
+                        ->setAnimated($this->firstRun)
+                        ->withOnColumnClickEventName('onColumnClick')
+                );
 
-            $areaChartModel = $cleaned
+            $how_often_chart = $how_often
+                ->reduce(
+                    function (ColumnChartModel $columnChartModel, $amount, $days) {
+                        return $columnChartModel->addColumn($days, $amount, '#3B82F6');
+                    },
+                    (new ColumnChartModel())
+                        ->setTitle("How often how much")
+                        ->setDataLabelsEnabled(true)
+                        ->setLegendVisibility(false)
+                        ->setAnimated($this->firstRun)
+                        ->withOnColumnClickEventName('onColumnClick')
+                );
+
+            $nut_per_day = $cleaned
                 ->reduce(
                     function (AreaChartModel $areaChartModel, $data, $date) {
                         return $areaChartModel->addPoint($date, $data->count());
@@ -102,8 +122,9 @@ class NutChart extends Component
         }
 
         return view('livewire.nut-chart')->with([
-            'areaChartModel' => $areaChartModel ?? null,
-            'columnChartModel' => $columnChartModel ?? null,
+            'nut_per_day' => $nut_per_day ?? null,
+            'how_often_chart' => $how_often_chart ?? null,
+            'nut_per_month' => $nut_per_month ?? null,
             'sharelink' => $generated_nut_log ?? null,
             'highest' => $highest ?? null,
             'average' => $average ?? null,

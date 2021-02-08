@@ -15,6 +15,7 @@ Inspired by [shihaamabr](https://github.com/shihaamabr) life.
 - Nut Per Day (graph)
 - Nut Per Month (graph)
 - Nut Amount per day (How often and how much graph)
+- Badge System (award badge according to stats)
 
 ## Setup
 

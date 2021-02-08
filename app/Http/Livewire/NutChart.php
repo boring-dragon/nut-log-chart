@@ -74,7 +74,7 @@ class NutChart extends Component
 
             $how_often = $totals->groupBy('data')->map(function ($item) {
                 return $item->sum('data');
-            });
+            })->sortKeys();
 
             $highest = $totals->sortByDesc('data')->first();
             $average = $totals->avg('data');

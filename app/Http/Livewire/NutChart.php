@@ -22,18 +22,18 @@ class NutChart extends Component
     protected $queryString = ['nut'];
 
     public $colors = [
-        'Jan' => '#EC4899',
-        'Feb' => '#3B82F6',
-        'Mar' => '#A5B4FC',
-        'Apr' => '#F59E0B',
-        'May' => '#EF4444',
-        'June' => '#FBBC05',
-        'July' => '#F99F81',
-        'Aug' => '#cbd5e0',
-        'Sep' => '#f6ad55',
-        'Oct' => '#fc8181',
-        'Nov' => '#90cdf4',
-        'Dec' => '#66DA26'
+        '#EC4899',
+        '#3B82F6',
+        '#A5B4FC',
+        '#F59E0B',
+        '#EF4444',
+         '#FBBC05',
+         '#F99F81',
+        '#cbd5e0',
+        '#f6ad55',
+        '#fc8181',
+        '#90cdf4',
+        '#66DA26'
     ];
 
 
@@ -61,7 +61,7 @@ class NutChart extends Component
             });
 
             $total_per_month = collect($result["messages"])->groupBy(function ($data) {
-                return Carbon::parse($data["date"])->format('M');
+                return Carbon::parse($data["date"])->format('M Y');
             });
 
             $totals = $cleaned->map(function ($item, $key) {
@@ -84,7 +84,7 @@ class NutChart extends Component
                 ->reduce(
                     function (ColumnChartModel $columnChartModel, $data, $month) {
 
-                        return $columnChartModel->addColumn($month, $data->count(), $this->colors[$month]);
+                        return $columnChartModel->addColumn($month, $data->count(), $this->colors[rand(0, 11)]);
                     },
                     (new ColumnChartModel())
                         ->setTitle($result["name"] . " Bar" ?: 'Nut log Bar')

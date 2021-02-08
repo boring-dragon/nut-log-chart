@@ -45,8 +45,10 @@
 
     @if($highest)
     <div>
-        <h3 class="text-lg leading-6 text-center font-medium text-gray-700">
+        <h3 class="text-xl leading-6 text-center font-medium text-gray-700">
             Statistics
+            <br>
+            <span class="text-sm text-gray-600">({{$title}})</span>
         </h3>
         <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div class="bg-white overflow-hidden shadow rounded-lg">
@@ -89,7 +91,14 @@
     </div>
     @endif
 
+    @if($highest)
+    @include('partials.badges', [
+    'average' => $average,
+    'sum' => $sum,
+    'highest' => $highest["data"]
+    ])
 
+    @endif
 
     @if($nut_per_day)
     <h3 class="text-gray-700 text-xl font-semibold mt-3 text-center">Nut per Day</h3>

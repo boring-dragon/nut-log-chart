@@ -122,6 +122,7 @@ class NutChart extends Component
         }
 
         return view('livewire.nut-chart')->with([
+            'title' => $result["name"] ?? null,
             'nut_per_day' => $nut_per_day ?? null,
             'how_often_chart' => $how_often_chart ?? null,
             'nut_per_month' => $nut_per_month ?? null,

@@ -29,7 +29,7 @@
     @yield('body')
 
     @livewireScripts
-    @livewireChartsScripts
+    <script src="/vendor/livewire-charts/app.js"></script>
 </body>
 
 </html>

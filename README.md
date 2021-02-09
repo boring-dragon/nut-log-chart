@@ -17,6 +17,23 @@ Inspired by [shihaamabr](https://github.com/shihaamabr) life.
 - Nut Amount per day (How often and how much graph)
 - Badge System (award badge according to stats)
 
+## Badge Award System 🪐
+
+### Nut Badge
+ -  Nut Legend (Total Nut >= 150)
+ -  Nut Silver (Total Nut <= 100 && Total Nut >= 50)
+ -  Nut Noob (Else)
+ 
+###  Plats
+-  Banana Plat (average > 2)
+-  Potato Plat (average < 2)
+-  Orange Plat (Else)
+
+### Elements
+- Eternal flame (Highest nutted >= 8)
+- Aqua (Highest nutted < 8 && Highest nutted > 3)
+- Puff (Else)
+
 ## Setup
 
 ### Clone the repo 

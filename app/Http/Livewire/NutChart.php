@@ -112,6 +112,7 @@ class NutChart extends Component
                     },
                     (new AreaChartModel())
                         ->setTitle($result["name"] ?: 'Nut log Peak Overview')
+                        ->setSmoothCurve()
                         ->setAnimated($this->firstRun)
                         ->setColor('#3B82F6')
                         ->withOnPointClickEvent('onAreaPointClick')
